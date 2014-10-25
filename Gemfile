@@ -10,6 +10,17 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 
+# Use Bootstrap when we generate stuff
+gem 'bootstrap-generators', '~> 3.2.0'
+
+# We use FriendlyId for slugs
+#
+# See: https://github.com/norman/friendly_id
+gem 'friendly_id', '~> 5.0.0'
+
+# Devise is the standard for authentication.
+gem 'devise'
+
 group :development do
   gem 'spring'
 end
