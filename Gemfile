@@ -12,6 +12,10 @@ gem 'jbuilder', '~> 2.0'
 
 # Use Bootstrap when we generate stuff
 gem 'bootstrap-generators', '~> 3.2.0'
+# WYSIWYG Editor
+gem "wysiwyg-rails"
+# Popular icons font
+gem "font-awesome-rails"
 
 # We use FriendlyId for slugs
 #
@@ -27,7 +31,10 @@ end
 
 group :development, :test do
   gem 'spring-commands-rspec'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.0.2'
   gem 'guard-rspec'
   gem 'rb-fsevent' if `uname` =~ /Darwin/
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'shoulda-matchers', require: false
 end

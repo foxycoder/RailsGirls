@@ -11,27 +11,16 @@
     </div>
   <% end %>
 
-  <div class="field">
+  <div class="form-group">
     <%= f.label :title %><br>
-    <%= f.text_field :title %>
+    <%= f.text_field :title, class: "form-control", placeholder: "Title" %>
   </div>
-  <div class="field">
-    <%= f.label :slug %><br>
-    <%= f.text_field :slug %>
-  </div>
-  <div class="field">
+  <div class="form-group">
     <%= f.label :content %><br>
-    <%= f.text_area :content %>
-  </div>
-  <div class="field">
-    <%= f.label :published_at %><br>
-    <%= f.datetime_select :published_at %>
-  </div>
-  <div class="field">
-    <%= f.label :user_id %><br>
-    <%= f.text_field :user_id %>
+    <%= f.text_area :content, class: "form-control", placeholder: "Type your post content here...", rows: 14 %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= link_to "Back", posts_path, class: 'btn btn-default' %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>
