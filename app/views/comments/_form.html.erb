@@ -1,0 +1,5 @@
+<%= form_for(@comment, url: comment_post_path(@post)) do |c| %>
+  <%= c.label :content %>
+  <%= c.text_area :content, class: "form-control", placeholder: "Type your comment here..." %>
+  <%= c.submit "Comment", class: "btn btn-primary" %>
+<% end %>
