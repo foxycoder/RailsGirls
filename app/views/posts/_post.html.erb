@@ -1,5 +1,10 @@
-<h1><%= link_to post.title, post %></h1>
+<div class="post<%= " unpublished" if post.unpublished? %>">
+<h1>
+  <% if post.unpublished? %>
+  <%= link_to "Publish", publish_post_path(post), method: :put, class: "btn btn-success" %>
+  <% end %>
+  <%= link_to post.title, post %>
+</h1>
 <p>On <%= l(post.created_at) %>, by <%= post.user && post.user.email %></p>
 <%= post.content.html_safe %>
-<hr>
-
+</div>

@@ -1,11 +1,11 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, except: [ :index, :show ]
-  before_action :set_post, only: [:show, :edit, :update, :comment, :destroy]
+  before_action :set_post, only: [:show, :edit, :update, :publish, :comment, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.published_and_owned_by(current_user)
   end
 
   # GET /posts/1
@@ -35,6 +35,18 @@ class PostsController < ApplicationController
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
+        format.json { render json: @post.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def publish
+    respond_to do |format|
+      if @post.publish
+        format.html { redirect_to @post, notice: 'Post was successfully published.' }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit }
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
@@ -84,7 +96,7 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.friendly.find(params[:id])
+    @post = Post.published_and_owned_by(current_user).friendly.find(params[:id])
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

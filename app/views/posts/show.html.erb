@@ -1,7 +1,12 @@
 <p id="notice"><%= notice %></p>
 
-<article class="post">
-  <h1><%= @post.title %></h1>
+<article class="post<%= " unpublished" if @post.unpublished? %>">
+  <h1>
+    <% if @post.unpublished? %>
+    <%= link_to "Publish", publish_post_path(@post), method: :put, class: "btn btn-success" %>
+    <% end %>
+    <%= @post.title %>
+  </h1>
   <p>On <%= l(@post.created_at) %>, by <%= @post.user && @post.user.email %></p>
 
   <%= @post.content.html_safe %>
@@ -11,7 +16,14 @@
 
     <%= render @post.comments %>
     <% if user_signed_in? %>
+      <% if @post.unpublished? %>
+      <div class="bs-callout bs-callout-info">
+        <h4>Placing comments</h4>
+        <p>You need to <%= link_to "publish your post", publish_post_path(@post), method: :put %> to allow comments.</p>
+      </div>
+      <% else %>
       <%= render 'comments/form' %>
+      <% end %>
     <% else %>
       <div class="bs-callout bs-callout-info">
         <h4>Placing comments</h4>

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   resources :posts do
     member do
       post :comment
+      put :publish
     end
   end
   root to: "posts#index"
