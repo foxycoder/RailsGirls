@@ -12,7 +12,7 @@ module Shared::Publishable
     end
 
     def published?
-      published_at && published_at < DateTime.now
+      published_at.present? && published_at < DateTime.now
     end
 
     def unpublished?
