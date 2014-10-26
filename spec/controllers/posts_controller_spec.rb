@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe PostsController do
+describe PostsController, type: :controller do
   let(:user) { FactoryGirl.create :user }
   let(:valid_attributes) { FactoryGirl.attributes_for :post }
 
