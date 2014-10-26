@@ -16,6 +16,8 @@ gem 'bootstrap-generators', '~> 3.2.0'
 gem "wysiwyg-rails"
 # Popular icons font
 gem "font-awesome-rails"
+# Draper for decorating objects!
+gem 'draper'
 
 # We use FriendlyId for slugs
 #
