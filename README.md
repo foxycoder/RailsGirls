@@ -68,8 +68,6 @@ $ ->
 
 That's it!
 
-### Create a concern
-
 ### Create a Decorator
 
 As you can see in `app/views/posts/show.html.erb` and
@@ -118,4 +116,59 @@ started on usage of the decorator gem.
 > **Bonus** Note that we have removed `html_safe` from the comments view
 > as well! Now go and make a decorator for your Comments too!
 
+### Create a concern
 
+When you open up the `Post` model, you will see it has a number of
+methods that deal with publishing posts. Now, imagine we want to add
+these methods to `Comment` as well. We could just copy over the methods
+to the model file, but we could also extract this out into a concern, so
+we do not need to copy this, and we can just include it in both the
+`Post` and the `Comment` models!
+
+#### Create the concern
+
+```ruby
+# app/models/concerns/shared/publishable.rb
+
+module Shared::Publishable
+  extend ActiveSupport::Concern
+
+  included do
+    # Move the methods from the Post model here!
+  end
+end
+```
+
+Now include it in the Post model
+
+```
+# app/models/post.rb
+
+class Post < ActiveRecord::Base
+  include Shared::Publishable
+
+  # ...
+end
+```
+
+And in the Comment model as well
+
+```
+# app/models/comment.rb
+
+class Comment < ActiveRecord::Base
+  include Shared::Publishable
+
+  # ...
+end
+```
+
+Now boot up a Rails console and check on some comments' published
+status, e.g.:
+
+```
+$ spring rails console
+$> Comment.last.published?
+```
+
+That should work for both Comment and Post models!
