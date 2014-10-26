@@ -6,6 +6,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     @posts = Post.published_and_owned_by(current_user)
+    @posts = PostDecorator.decorate_collection(@posts)
   end
 
   # GET /posts/1
@@ -96,7 +97,7 @@ class PostsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_post
-    @post = Post.published_and_owned_by(current_user).friendly.find(params[:id])
+    @post = Post.published_and_owned_by(current_user).friendly.find(params[:id]).decorate
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
