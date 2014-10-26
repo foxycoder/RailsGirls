@@ -5,6 +5,6 @@
   <% end %>
   <%= link_to post.title, post %>
 </h1>
-<p>On <%= l(post.created_at) %>, by <%= post.user && post.user.email %></p>
+<p>On <%= timeago(post.created_at) %>, by <%= post.user && post.user.email %></p>
 <%= post.content.html_safe %>
 </div>
